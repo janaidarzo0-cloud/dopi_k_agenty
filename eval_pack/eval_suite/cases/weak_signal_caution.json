@@ -1,0 +1,29 @@
+{
+  "case_id": "weak_signal_caution",
+  "title": "Weak signal where caution is the correct conclusion",
+  "dataset": "eval_pack/test_datasets/generated/weak_signal.csv",
+  "questionnaire": "eval_pack/test_datasets/generated/weak_signal_questionnaire.txt",
+  "user_goal": "Проверь, есть ли различия между группами. Если различия слабые или база мала, честно скажи, что нельзя делать сильные выводы.",
+  "expected_behavior": [
+    "Run basic descriptive and significance checks",
+    "Avoid overclaiming",
+    "Use caution language when evidence is weak",
+    "Recommend more sample or follow-up if needed"
+  ],
+  "forbidden_behavior": ["strong conclusion from weak evidence"],
+  "expected_terms": ["осторож", "различ", "групп"],
+  "forbidden_terms": ["доказано", "однозначно", "точно является"],
+  "requires_caution": true,
+  "min_evidence_count": 2,
+  "required_artifacts": ["analysis_summary.json", "evidence.jsonl"],
+  "scoring_weights": {
+    "artifact_completeness": 0.10,
+    "evidence_volume": 0.10,
+    "evidence_grounding": 0.20,
+    "numeric_faithfulness": 0.20,
+    "objective_fit": 0.10,
+    "caveat_honesty": 0.20,
+    "critic_coverage": 0.05,
+    "insight_quality": 0.05
+  }
+}
