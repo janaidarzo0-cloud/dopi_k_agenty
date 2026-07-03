@@ -1,0 +1,9 @@
+{
+  "case_id": "multiselect_block_001",
+  "kind": "multiselect_block",
+  "seed": 303,
+  "n": 420,
+  "max_iterations": 22,
+  "question_timeout_seconds": 5,
+  "user_prompt": "Проанализируй B9 как множественный выбор: проникновение опций, ранжирование источников и отличия по возрасту."
+}
