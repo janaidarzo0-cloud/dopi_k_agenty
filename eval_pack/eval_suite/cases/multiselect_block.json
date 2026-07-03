@@ -1,0 +1,29 @@
+{
+  "case_id": "multiselect_block",
+  "title": "Multi-response block handling",
+  "dataset": "eval_pack/test_datasets/generated/multiselect_block.csv",
+  "questionnaire": "eval_pack/test_datasets/generated/multiselect_block_questionnaire.txt",
+  "user_goal": "Проанализируй блок B9 как множественный выбор: проникновение опций, ранжирование и отличия по возрасту.",
+  "expected_behavior": [
+    "Treat B9_1..B9_4 as one multi-response block",
+    "Report option penetration, not separate unrelated variables",
+    "Compare by age group",
+    "Use evidence ids for findings"
+  ],
+  "forbidden_behavior": ["separate unrelated columns only"],
+  "expected_terms": ["b9", "множе", "возраст"],
+  "forbidden_terms": ["kpi"],
+  "requires_caution": false,
+  "min_evidence_count": 3,
+  "required_artifacts": ["analysis_summary.json", "evidence.jsonl", "insights.json"],
+  "scoring_weights": {
+    "artifact_completeness": 0.10,
+    "evidence_volume": 0.15,
+    "evidence_grounding": 0.20,
+    "numeric_faithfulness": 0.20,
+    "objective_fit": 0.15,
+    "caveat_honesty": 0.05,
+    "critic_coverage": 0.05,
+    "insight_quality": 0.10
+  }
+}
