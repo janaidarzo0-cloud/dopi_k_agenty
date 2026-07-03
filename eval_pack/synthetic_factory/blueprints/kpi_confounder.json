@@ -1,0 +1,10 @@
+{
+  "case_id": "kpi_confounder_001",
+  "kind": "kpi_confounder",
+  "seed": 202,
+  "n": 640,
+  "max_iterations": 28,
+  "question_timeout_seconds": 5,
+  "requires_caution": true,
+  "user_prompt": "Найди, что связано с готовностью рекомендовать. Проверь драйверы NPS, сегменты и не перепутай продуктовый эффект с составом аудитории."
+}
