@@ -1,0 +1,29 @@
+{
+  "case_id": "kpi_confounder",
+  "title": "KPI study with true driver and confounder",
+  "dataset": "eval_pack/test_datasets/generated/kpi_confounder.csv",
+  "questionnaire": "eval_pack/test_datasets/generated/kpi_confounder_questionnaire.txt",
+  "user_goal": "Найди, что связано с готовностью рекомендовать, проверь сегменты и не перепутай продуктовый эффект с сегментным составом.",
+  "expected_behavior": [
+    "Detect recommend_nps as KPI",
+    "Check service_quality and segment effects",
+    "Run significance or driver analysis",
+    "Use robustness or caveat language for confounding"
+  ],
+  "forbidden_behavior": ["product-only conclusion without segment check"],
+  "expected_terms": ["recommend", "сегмент", "сервис", "драйвер"],
+  "forbidden_terms": ["продукт b является причиной"],
+  "requires_caution": true,
+  "min_evidence_count": 5,
+  "required_artifacts": ["analysis_summary.json", "evidence.jsonl", "critic_assessment.json", "skeptic_review.json"],
+  "scoring_weights": {
+    "artifact_completeness": 0.08,
+    "evidence_volume": 0.12,
+    "evidence_grounding": 0.20,
+    "numeric_faithfulness": 0.20,
+    "objective_fit": 0.15,
+    "caveat_honesty": 0.10,
+    "critic_coverage": 0.10,
+    "insight_quality": 0.05
+  }
+}
