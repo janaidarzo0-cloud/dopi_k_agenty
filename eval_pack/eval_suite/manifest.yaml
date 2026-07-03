@@ -1,0 +1,21 @@
+suite_name: ai_survey_analyst_quality_v1
+version: 1.0.0
+purpose: >
+  Measure analytical maturity of AI Survey Analyst: framing, hypothesis quality,
+  evidence discipline, statistical caution, synthesis, and runtime discipline.
+thresholds:
+  minimum_total_score: 70
+  strong_total_score: 82
+  numeric_faithfulness: 90
+  evidence_grounding: 80
+cases:
+  - id: descriptive_no_kpi
+    path: cases/descriptive_no_kpi.json
+  - id: kpi_confounder
+    path: cases/kpi_confounder.json
+  - id: weak_signal_caution
+    path: cases/weak_signal_caution.json
+  - id: multiselect_block
+    path: cases/multiselect_block.json
+  - id: adversarial_questionnaire
+    path: cases/adversarial_questionnaire.json
