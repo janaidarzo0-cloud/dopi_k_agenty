@@ -1,0 +1,9 @@
+{
+  "case_id": "descriptive_no_kpi_001",
+  "kind": "descriptive_no_kpi",
+  "seed": 101,
+  "n": 360,
+  "max_iterations": 18,
+  "question_timeout_seconds": 5,
+  "user_prompt": "Опиши аудиторию и источники информации. KPI в этом исследовании нет: не ищи драйверы KPI, а выдели структуру, заметные различия и ограничения."
+}
