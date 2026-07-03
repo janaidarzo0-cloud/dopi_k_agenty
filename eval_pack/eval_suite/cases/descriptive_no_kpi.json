@@ -1,0 +1,29 @@
+{
+  "case_id": "descriptive_no_kpi",
+  "title": "Descriptive survey without KPI",
+  "dataset": "eval_pack/test_datasets/generated/descriptive_no_kpi.csv",
+  "questionnaire": "eval_pack/test_datasets/generated/descriptive_no_kpi_questionnaire.txt",
+  "user_goal": "Опиши аудиторию, основные источники информации и интересные отличия по возрасту и городу. KPI нет.",
+  "expected_behavior": [
+    "Do not invent KPI",
+    "Use frequencies, crosstab_vars, find_deviations, segmentation if useful",
+    "Describe audience and information channels",
+    "Mark limitations honestly"
+  ],
+  "forbidden_behavior": ["forced_kpi", "driver claim without KPI"],
+  "expected_terms": ["источник", "возраст", "город"],
+  "forbidden_terms": ["nps", "драйвер nps", "kpi satisfaction"],
+  "requires_caution": false,
+  "min_evidence_count": 3,
+  "required_artifacts": ["analysis_summary.json", "evidence.jsonl", "insights.json"],
+  "scoring_weights": {
+    "artifact_completeness": 0.10,
+    "evidence_volume": 0.10,
+    "evidence_grounding": 0.20,
+    "numeric_faithfulness": 0.20,
+    "objective_fit": 0.20,
+    "caveat_honesty": 0.05,
+    "critic_coverage": 0.10,
+    "insight_quality": 0.05
+  }
+}
