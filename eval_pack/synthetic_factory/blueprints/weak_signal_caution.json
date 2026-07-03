@@ -1,0 +1,10 @@
+{
+  "case_id": "weak_signal_caution_001",
+  "kind": "weak_signal_caution",
+  "seed": 404,
+  "n": 96,
+  "max_iterations": 16,
+  "question_timeout_seconds": 5,
+  "requires_caution": true,
+  "user_prompt": "Проверь, есть ли различия между группами. Если сигнал слабый или база мала, прямо скажи, что сильные выводы делать нельзя."
+}
