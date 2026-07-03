@@ -74,10 +74,38 @@ def wait_project(base_url: str, project_id: str, timeout_sec: int) -> dict[str, 
     raise TimeoutError(f"Project {project_id} did not finish before timeout")
 
 
+def download_outputs(base_url: str, project_id: str, out_dir: Path, state: dict[str, Any]) -> None:
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "project_state.json").write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+    try:
+        summary = read_json(f"{base_url.rstrip('/')}/api/projects/{urllib.parse.quote(project_id)}/summary")
+        if summary.get("summary") is not None:
+            (out_dir / "analysis_summary.json").write_text(json.dumps(summary["summary"], ensure_ascii=False, indent=2), encoding="utf-8")
+        (out_dir / "api_summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+    except Exception:
+        pass
+    try:
+        artifacts = read_json(f"{base_url.rstrip('/')}/api/projects/{urllib.parse.quote(project_id)}/artifacts").get("artifacts", [])
+        (out_dir / "artifacts_index.json").write_text(json.dumps(artifacts, ensure_ascii=False, indent=2), encoding="utf-8")
+        for item in artifacts:
+            artifact_path = item.get("path") or item.get("name") or item.get("artifact_path")
+            if not artifact_path:
+                continue
+            url = f"{base_url.rstrip('/')}/api/projects/{urllib.parse.quote(project_id)}/artifacts/{urllib.parse.quote(str(artifact_path))}"
+            try:
+                with urllib.request.urlopen(url, timeout=60) as resp:
+                    (out_dir / Path(str(artifact_path)).name).write_bytes(resp.read())
+            except Exception:
+                continue
+    except Exception:
+        pass
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run a generated synthetic case through a local Analytic_AI_agent FastAPI server.")
     parser.add_argument("--base-url", default="http://127.0.0.1:8000")
     parser.add_argument("--case-root", type=Path, required=True)
+    parser.add_argument("--results-root", type=Path, default=Path("projects_eval/synthetic_results"))
     parser.add_argument("--timeout-sec", type=int, default=1800)
     args = parser.parse_args()
     project_id = create_project(args.base_url, args.case_root)
@@ -85,7 +113,9 @@ def main() -> int:
     if str(state.get("status", "")).lower() == "analytics_ready":
         post_json(f"{args.base_url.rstrip('/')}/api/projects/{urllib.parse.quote(project_id)}/report", {})
         state = wait_project(args.base_url, project_id, args.timeout_sec)
-    print(json.dumps({"case_id": args.case_root.name, "project_id": project_id, "status": state.get("status")}, ensure_ascii=False, indent=2))
+    out_dir = args.results_root / args.case_root.name / "output"
+    download_outputs(args.base_url, project_id, out_dir, state)
+    print(json.dumps({"case_id": args.case_root.name, "project_id": project_id, "status": state.get("status"), "output_dir": str(out_dir)}, ensure_ascii=False, indent=2))
     return 0
 
 
