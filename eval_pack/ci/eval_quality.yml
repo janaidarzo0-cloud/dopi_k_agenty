@@ -1,0 +1,19 @@
+name: Eval Quality
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'eval_pack/**'
+      - 'app/**'
+      - 'tests/**'
+
+jobs:
+  eval-self-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run eval pack self-test
+        run: bash eval_pack/run_eval.sh --self-test
+      - name: Generate synthetic data
+        run: python3 eval_pack/scoring_scripts/make_synthetic_data.py
