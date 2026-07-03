@@ -1,0 +1,16 @@
+id,segment,product,service_quality,price_value,recommend_nps
+1,core,A,5,4,9
+2,core,B,5,3,9
+3,casual,A,3,4,6
+4,casual,B,4,3,7
+5,price_sensitive,A,2,2,4
+6,price_sensitive,B,3,2,5
+7,core,A,4,5,8
+8,core,B,5,5,10
+9,casual,A,2,3,5
+10,casual,B,3,4,6
+11,price_sensitive,A,1,2,3
+12,price_sensitive,B,2,1,4
+13,core,A,5,4,9
+14,casual,B,4,4,7
+15,price_sensitive,A,2,3,4
