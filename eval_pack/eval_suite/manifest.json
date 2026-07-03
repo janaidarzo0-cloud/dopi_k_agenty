@@ -1,0 +1,28 @@
+{
+  "suite_name": "ai_survey_analyst_quality_v1",
+  "version": "1.0.0",
+  "description": "Quality eval suite for a survey-analysis AI agent. Focus: reasoning, evidence grounding, caveat discipline, and synthesis quality.",
+  "default_thresholds": {
+    "minimum_total_score": 70,
+    "strong_total_score": 82,
+    "numeric_faithfulness": 90,
+    "evidence_grounding": 80
+  },
+  "cases": [
+    {"id": "descriptive_no_kpi", "path": "cases/descriptive_no_kpi.json"},
+    {"id": "kpi_confounder", "path": "cases/kpi_confounder.json"},
+    {"id": "weak_signal_caution", "path": "cases/weak_signal_caution.json"},
+    {"id": "multiselect_block", "path": "cases/multiselect_block.json"},
+    {"id": "adversarial_questionnaire", "path": "cases/adversarial_questionnaire.json"}
+  ],
+  "dimensions": [
+    "artifact_completeness",
+    "evidence_volume",
+    "evidence_grounding",
+    "numeric_faithfulness",
+    "objective_fit",
+    "caveat_honesty",
+    "critic_coverage",
+    "insight_quality"
+  ]
+}
