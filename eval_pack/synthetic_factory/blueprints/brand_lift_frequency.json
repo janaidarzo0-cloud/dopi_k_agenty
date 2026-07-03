@@ -1,0 +1,10 @@
+{
+  "case_id": "brand_lift_frequency_001",
+  "kind": "brand_lift_frequency",
+  "seed": 505,
+  "n": 760,
+  "max_iterations": 30,
+  "question_timeout_seconds": 5,
+  "requires_caution": true,
+  "user_prompt": "Оцени бренд-лифт: сравни exposed/control, посмотри частоту контакта, awareness и consideration. Отделяй наблюдательные данные от причинных заявлений."
+}
